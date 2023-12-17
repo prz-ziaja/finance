@@ -2,12 +2,12 @@ version: '3.9'
 
 services:
   postgres:
-    image: postgres:14-alpine
+    image: postgres:16.1-alpine3.19
     ports:
       - 5432:5432
     volumes:
       - ~/data/postgres:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=S3cret
-      - POSTGRES_USER=citizix_user
-      - POSTGRES_DB=finaces
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=finances
