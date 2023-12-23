@@ -3,8 +3,13 @@ CREATE TABLE STOCK (
     symbol VARCHAR(10),
     observed_at TIMESTAMPTZ,
     observed_at_utc TIMESTAMP,
-    price FLOAT,
-    interval INTERVAL,
-    max_price FLOAT,
-    min_price FLOAT
+    interval INT,
+    open_price FLOAT,
+    high_price FLOAT,
+    low_price FLOAT,
+    close_price FLOAT,
+    adj_close FLOAT,
+    volume FLOAT
 );
+CREATE INDEX STOCK_SYMBOL_INDEX
+ON STOCK USING HASH (symbol);

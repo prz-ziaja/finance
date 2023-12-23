@@ -1,2 +1,2 @@
-def get_stock(self, start_datetime, end_datetime, interval):
+def get_stock(symbol, start_datetime, end_datetime, interval):
     pass
