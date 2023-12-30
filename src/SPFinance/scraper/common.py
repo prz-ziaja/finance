@@ -2,11 +2,19 @@ import pandas as pd
 import yfinance as yf
 import datetime as dt
 
+interval_options = {
+    "1m": 60, 
+    "15m": 900,
+    "": 24*60*60
+}
+
 def get_stock(symbol:str, start_datetime: dt.datetime, end_datetime:dt.datetime, interval:str = ""):
     """
     
     """
     symbol = symbol.upper()
+    if interval not in interval_options.keys():
+        raise Exception(f"No interval symbol: {interval}")
 
     if interval:
         data = yf.download(symbol, start_datetime, end_datetime, interval=interval)
@@ -23,7 +31,7 @@ def get_stock(symbol:str, start_datetime: dt.datetime, end_datetime:dt.datetime,
 
     d['symbol'] = symbol
     d['observed_at_utc'] = pd.Series([1 for _ in range(len(d.observed_at))],index=d.observed_at).tz_convert('UTC').reset_index()['observed_at']
-    d['interval'] = 24*60*60
+    d['interval'] = interval_options[interval]
     d.rename(
         columns={
             'Open':"open_price",
