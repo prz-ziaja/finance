@@ -1,6 +1,7 @@
 import pandas as pd
 import yfinance as yf
 import datetime as dt
+import argparse
 
 interval_options = {
     "1m": 60, 
@@ -44,3 +45,11 @@ def get_stock(symbol:str, start_datetime: dt.datetime, end_datetime:dt.datetime,
         inplace=True
     )
     return d
+
+def get_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--plugin-name", type=str, required=True, help="Name of plugin - E.G 'offline.offlineScraper'")
+    parser.add_argument("--configuration-getter-name", type=str, required=True, help="Name of configuration getter - look into SPFinance.configuration_getter")
+    parser.add_argument("--db-host", type=str, required=False, help="Param for offlineScraper - host of postgres database")
+    parser.add_argument("--db-host", type=str, required=False, help="Param for offlineScraper - host of postgres database")
+    return parser

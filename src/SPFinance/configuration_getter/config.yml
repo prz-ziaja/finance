@@ -1,0 +1,14 @@
+postgres:
+    POSTGRES_PASSWORD: &PSQL_PASSWORD root
+    POSTGRES_USER: &PSQL_USER root
+    POSTGRES_DB: &PSQL_DB finance
+rabbitmq:
+    RABBITMQ_DEFAULT_USER: &RABBIT_USER guest
+    RABBITMQ_DEFAULT_PASS: &RABBIT_PASS guest
+offline_scraper:
+    db_user: *PSQL_USER
+    db_password: *PSQL_PASSWORD
+    db_name: *POSTGRES_DB
+online_scraper:
+    rabbit_user: *RABBIT_USER
+    rabbit_pass: *RABBIT_PASS
