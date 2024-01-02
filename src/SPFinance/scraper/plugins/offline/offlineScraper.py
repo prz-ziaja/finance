@@ -1,5 +1,5 @@
 import datetime as dt
-from concurrent.futures import ProcessPoolExecutor, wait
+from concurrent.futures import as_completed, ProcessPoolExecutor
 from SPFinance.scraper import get_stock
 from SPFinance.scraper.abstractScraper import abstractOfflineScraper, abstractScraper
 from SPFinance.scraper.common import DATETIME_FORMAT
@@ -31,7 +31,6 @@ class offlineScraper(abstractOfflineScraper):
     def run(self):
         procpoolexc = ProcessPoolExecutor()
         jobs = [procpoolexc.submit(get_stock, symbol, self.start_datetime, self.end_datetime) for symbol in self.objects_to_scrap]
-        data = [job.result() for job in jobs]
         
-        for dataframe in concurrent.futures.as_completed(data):
-            self.load_stock_into_database(dataframe)
+        for dataframe in as_completed(jobs):
+            self.load_stock_into_database(dataframe.result())
