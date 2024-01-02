@@ -64,6 +64,5 @@ def get_parser():
     parser.add_argument("--objects-to-scrap", nargs="*", required=False, help="Param for offlineScraper - host of postgres database")
     parser.add_argument("--start-datetime", type=str, required=False, help="Param for offlineScraper - host of postgres database")
     parser.add_argument("--end-datetime", type=str, required=False, help="Param for offlineScraper - host of postgres database")
-    parser.add_argument("--interval", type=str, required=False, help="Param for offlineScraper - host of postgres database")
 
     return parser

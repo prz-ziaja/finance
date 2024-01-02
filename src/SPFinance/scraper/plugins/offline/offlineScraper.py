@@ -14,13 +14,11 @@ class offlineScraper(abstractOfflineScraper):
         configuration_getter_name:str,
         start_datetime: str,
         end_datetime: str,
-        interval: str,
         **configuration_getter_args
     ):
         abstractOfflineScraper.__init__(self,name="offline_scraper", objects_to_scrap=objects_to_scrap, db_host=db_host, configuration_getter_name=configuration_getter_name,**configuration_getter_args)
         self.start_datetime = dt.datetime.strptime(start_datetime, DATETIME_FORMAT)
         self.end_datetime = dt.datetime.strptime(end_datetime, DATETIME_FORMAT)
-        self.interval = interval
         self.objects_to_scrap = objects_to_scrap
 
 
