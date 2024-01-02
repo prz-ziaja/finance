@@ -1,6 +1,5 @@
 import datetime as dt
-import multiprocessing
-from concurrent.futures import ThreadPoolExecutor, wait
+from concurrent.futures import ProcessPoolExecutor, wait
 from SPFinance.scraper import get_stock
 from SPFinance.scraper.abstractScraper import abstractOfflineScraper, abstractScraper
 from SPFinance.scraper.common import DATETIME_FORMAT
@@ -23,23 +22,16 @@ class offlineScraper(abstractOfflineScraper):
         self.end_datetime = dt.datetime.strptime(end_datetime, DATETIME_FORMAT)
         self.interval = interval
         self.objects_to_scrap = objects_to_scrap
-        self.multithread_manager = multiprocessing.Manager()
-        self.lock_yf = self.multithread_manager.Lock()
-        self.lock_db = self.multithread_manager.Lock()
 
-    def load_stock_into_database(self, symbol):
-        with self.lock_yf:
-            stock_data = get_stock(symbol, self.start_datetime, self.end_datetime)
 
-        print(f"loading into db {symbol}")
-        with self.lock_db:
-            stock_data.to_sql('stock', self.engine, if_exists='append', index=False)
+    def load_stock_into_database(self, data):
+        print(f"loading into db {data['symbol'].loc[0]}")
+        data.to_sql('stock', self.engine, if_exists='append', index=False)
 
     def run(self):
-        pool = ThreadPoolExecutor()
-        jobs = [pool.submit(self.load_stock_into_database, symbol) for symbol in self.objects_to_scrap]
-        for job in jobs:
-            try:
-                print(f"Errors: {job.result()}")
-            except Exception as e:
-                raise e
+        procpoolexc = ProcessPoolExecutor()
+        jobs = [procpoolexc.submit(get_stock, symbol, self.start_datetime, self.end_datetime) for symbol in self.objects_to_scrap]
+        data = [job.result() for job in jobs]
+        
+        for dataframe in concurrent.futures.as_completed(data):
+            self.load_stock_into_database(dataframe)
