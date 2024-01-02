@@ -6,7 +6,7 @@ import importlib
 
 
 class abstractScraper:
-    def __init__(self, name):
+    def __init__(self, name, *args, **kwargs):
         self.component_name = name
 
     def get_name(self):
@@ -26,9 +26,9 @@ class abstractOfflineScraper(abstractScraper):
         configuration_getter_name:str,
         **configuration_getter_args
     ):
-        super(abstractScraper, self).__init__(name)
+        abstractScraper.__init__(self, name=name)
         self.get_configuration(configuration_getter_name, **configuration_getter_args)
-        self.engine = create_engine(f"postgresql+psycopg2://{self.config['db_user_name']}:{self.config['db_user_password']}@{db_host}/{self.config['db_name']}")
+        self.engine = create_engine(f"postgresql+psycopg2://{self.config['db_user']}:{self.config['db_password']}@{db_host}/{self.config['db_name']}")
         self.objects = objects_to_scrap
 
     def run(self):

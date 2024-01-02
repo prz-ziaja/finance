@@ -9,6 +9,8 @@ interval_options = {
     "": 24*60*60
 }
 
+DATETIME_FORMAT = "%Y.%m.%dT%H:%M:%S"
+
 def get_stock(symbol:str, start_datetime: dt.datetime, end_datetime:dt.datetime, interval:str = ""):
     """
     
@@ -25,10 +27,15 @@ def get_stock(symbol:str, start_datetime: dt.datetime, end_datetime:dt.datetime,
     data_tz = data.tz_localize(yf.Ticker(symbol).info['timeZoneFullName'])
     d = data_tz.reset_index()
 
+
     if 'Date' in d.columns:
         d['observed_at'] = d.Date.apply(lambda x: x+dt.timedelta(hours=23,minutes=59))
+        d.drop(columns=['Date'], axis=1, inplace=True)
     elif 'Datetime' in d.columns:
         d['observed_at'] = d.Datetime
+        d.drop(columns=['Datetime'], axis=1, inplace=True)
+    else:
+        raise Exception("There is no date/datetime column in scraped data.")
 
     d['symbol'] = symbol
     d['observed_at_utc'] = pd.Series([1 for _ in range(len(d.observed_at))],index=d.observed_at).tz_convert('UTC').reset_index()['observed_at']
@@ -44,12 +51,19 @@ def get_stock(symbol:str, start_datetime: dt.datetime, end_datetime:dt.datetime,
         },
         inplace=True
     )
+    print(d)
     return d
 
 def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--plugin-name", type=str, required=True, help="Name of plugin - E.G 'offline.offlineScraper'")
     parser.add_argument("--configuration-getter-name", type=str, required=True, help="Name of configuration getter - look into SPFinance.configuration_getter")
+
+    # offline scraper args
     parser.add_argument("--db-host", type=str, required=False, help="Param for offlineScraper - host of postgres database")
-    parser.add_argument("--db-host", type=str, required=False, help="Param for offlineScraper - host of postgres database")
+    parser.add_argument("--objects-to-scrap", nargs="*", required=False, help="Param for offlineScraper - host of postgres database")
+    parser.add_argument("--start-datetime", type=str, required=False, help="Param for offlineScraper - host of postgres database")
+    parser.add_argument("--end-datetime", type=str, required=False, help="Param for offlineScraper - host of postgres database")
+    parser.add_argument("--interval", type=str, required=False, help="Param for offlineScraper - host of postgres database")
+
     return parser

@@ -8,7 +8,7 @@ rabbitmq:
 offline_scraper:
     db_user: *PSQL_USER
     db_password: *PSQL_PASSWORD
-    db_name: *POSTGRES_DB
+    db_name: *PSQL_DB
 online_scraper:
     rabbit_user: *RABBIT_USER
     rabbit_pass: *RABBIT_PASS
