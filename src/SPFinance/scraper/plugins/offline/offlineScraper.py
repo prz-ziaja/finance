@@ -24,16 +24,19 @@ class offlineScraper(abstractOfflineScraper):
         self.interval = interval
         self.objects_to_scrap = objects_to_scrap
         self.multithread_manager = multiprocessing.Manager()
-        self.lock = self.multithread_manager.Lock()
+        self.lock_yf = self.multithread_manager.Lock()
+        self.lock_db = self.multithread_manager.Lock()
 
     def load_stock_into_database(self, symbol):
-        stock_data = get_stock(symbol, self.start_datetime, self.end_datetime)
-        with self.lock:
-            print(f"loading into db {symbol}")
+        with self.lock_yf:
+            stock_data = get_stock(symbol, self.start_datetime, self.end_datetime)
+
+        print(f"loading into db {symbol}")
+        with self.lock_db:
             stock_data.to_sql('stock', self.engine, if_exists='append', index=False)
 
     def run(self):
-        pool = ThreadPoolExecutor(2)
+        pool = ThreadPoolExecutor()
         jobs = [pool.submit(self.load_stock_into_database, symbol) for symbol in self.objects_to_scrap]
         for job in jobs:
             try:
