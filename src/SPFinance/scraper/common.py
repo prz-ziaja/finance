@@ -51,7 +51,7 @@ def get_stock(symbol:str, start_datetime: dt.datetime, end_datetime:dt.datetime,
         },
         inplace=True
     )
-    print(d)
+
     return d
 
 def get_parser():
