@@ -11,8 +11,9 @@ ENV PYTHONUNBUFFERED=1
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
 
+ARG INCUBATOR_VER=unknown
 WORKDIR /app
-COPY ./src /app
+#COPY ./src /app
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers

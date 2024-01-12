@@ -6,7 +6,7 @@ class Stock(CollectionGeneric):
         super().__init__(db_name, collection='stock', config_path=config_path)
         
     def get_documents(self):
-        return self.api.get_documents()
+        return {"stock": self.api.get_documents()}
     
     def add_document(self, document):
         self.api.add_document(document)
