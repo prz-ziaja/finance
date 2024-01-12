@@ -1,8 +1,8 @@
-from frontend.sql.collections.stock import Stock
+from SPFinance.database_connection.collections.stock import Stock
   
 
 if __name__ == '__main__': 
-    stock = Stock(db_name="finance", config_path="src/frontend/sql/connection.json")
+    stock = Stock(db_name="finance", config_path="src\SPFinance\database_connection\connection.json")
     
     doc = {
         "symbol": "'CAST'",

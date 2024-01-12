@@ -1,6 +1,5 @@
 import json
 import psycopg
-import pandas as pd 
 
 class Api:
     
