@@ -48,8 +48,8 @@ class Api:
             data = self.cursor.execute("""
                                 SELECT * FROM {collection}
                                 """.format(collection=self.collection)).fetchall()    
-        except BaseException as be:
-            print("ERROR: ", be)
+        except BaseException as err:
+            print("ERROR: ", err)
         
         return data
     
@@ -67,8 +67,8 @@ class Api:
                     filter = filter
                 )
             ).fetchall()
-        except BaseException as be:
-            print("ERROR: ", be)
+        except BaseException as err:
+            print("ERROR: ", err)
             self.client.rollback()
     
     
@@ -83,8 +83,8 @@ class Api:
                             columns=', '.join(document.keys()), 
                             values=", ".join(document.values()))
             )
-        except BaseException as be:
-            print("ERROR: ", be)
+        except BaseException as err:
+            print("ERROR: ", err)
             self.client.rollback()
         else:
             print("commited")
