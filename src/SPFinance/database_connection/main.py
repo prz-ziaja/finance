@@ -26,3 +26,13 @@ def home():
 @app.get("/items")
 def items():
     return stock.get_documents()
+
+
+@app.get("/offline-scraper")
+def offline_scraper():
+    try:
+        # TODO
+        #kod do wystartowania offline scrapera
+        return {"success":"Scraper Started"}
+    except BaseException as err:
+        return {"error": "Offline Scraper failure"}
