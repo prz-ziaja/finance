@@ -35,4 +35,4 @@ def offline_scraper():
         #kod do wystartowania offline scrapera
         return {"success":"Scraper Started"}
     except BaseException as err:
-        return {"error": "Offline Scraper failure"}
+        return {"error": str(err)}
