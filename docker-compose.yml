@@ -16,3 +16,5 @@ services:
 networks:
   default:
     driver: bridge
+
+engine = create_engine(f"postgresql+psycopg2://root:root@{db_host}/finance")
