@@ -31,7 +31,4 @@ class offlineScraper(abstractOfflineScraper):
         jobs = [procpoolexc.submit(get_stock, symbol, self.start_datetime, self.end_datetime) for symbol in self.objects_to_scrap]
         
         for dataframe in as_completed(jobs):
-            try:
-                self.load_stock_into_database(dataframe.result())
-            except Exception as e:
-                print(e)
+            self.load_stock_into_database(dataframe.result())
