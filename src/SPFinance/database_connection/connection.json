@@ -1,0 +1,7 @@
+{
+    "host": "postgres",
+    "port": 5432,
+    "user": "root",
+    "password": "root",
+    "connect": true
+}

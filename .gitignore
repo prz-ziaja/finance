@@ -9,7 +9,7 @@ data/*
 __pycache__/
 *.py[cod]
 *$py.class
-
+src/frontend/node_modules
 # C extensions
 *.so
 
