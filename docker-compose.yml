@@ -16,10 +16,21 @@ services:
   backend:
     image: spbackend
     volumes:
-      - ./src/:/app
+      - ./src/:/app/mounted
     ports:
       - 5000:5000
-    command: uvicorn SPFinance.database_connection.main:app --reload --host 0.0.0.0 --port 5000
+    command: sh -c "cd /app/mounted && uvicorn SPFinance.database_connection.main:app --reload --host 0.0.0.0 --port 5000"
+
+  frontend:
+    build: ./src/frontend
+    volumes:
+      - './src/frontend:/app'
+      - '/app/node_modules'
+    ports:
+      - 8080:8080
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
 
 networks:
   default:

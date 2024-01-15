@@ -1,5 +1,15 @@
 import json
 import psycopg
+import time
+
+def backoff(func):
+    def inner(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except:
+            time.sleep(10)
+            func(*args, **kwargs)
+    return inner
 
 class Api:
     
@@ -23,7 +33,8 @@ class Api:
         self.config_path = config_path
         
         self._connect()
-        
+    
+    @backoff
     def _connect(self):
         with open(self.config_path, 'r') as config:
             data = json.loads(config.read())

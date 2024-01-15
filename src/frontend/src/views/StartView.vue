@@ -2,7 +2,7 @@
   <div id="app">
     <div class='d-flex align-center justify-center'>
       <v-btn @click="getMessage(), dialog = true" size="x-large" color="deep-purple">
-        Start Offline Scrapper
+        Start Offline Scrapper test1
       </v-btn>
     </div>
 
@@ -42,7 +42,7 @@
     <div class="align-center pt-12 justify-center mt-10">
       <h4 v-if="returnInfo['success']">
         Information was sent to start a Offline Scraper! <br>
-        Operation starting.
+        Operation starting...
       </h4>
     </div>
   </div>
