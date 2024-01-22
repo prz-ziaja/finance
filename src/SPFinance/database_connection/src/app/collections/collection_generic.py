@@ -1,4 +1,4 @@
-from SPFinance.database_connection.api import Api
+from app.api import Api
 
 
 class CollectionGeneric:

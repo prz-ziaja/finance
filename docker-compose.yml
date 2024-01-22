@@ -17,7 +17,7 @@ services:
     container_name: spbackend
     build: ./src/SPFinance/database_connection
     volumes:
-      - ./src/SPFinance/database_connection/:/app
+      - ./src/SPFinance/database_connection/src:/app
     ports:
       - 5000:5000
     command: uvicorn SPFinance.database_connection.main:app --reload --host 0.0.0.0 --port 5000

@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from SPFinance.database_connection.collections.stock import Stock
+from app.collections.stock import Stock
 
 
 stock = Stock(db_name="finance", config_path="/app/SPFinance/database_connection/connection.json")
