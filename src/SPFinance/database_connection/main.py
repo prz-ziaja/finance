@@ -31,7 +31,7 @@ def items():
 @app.get("/offline-scraper")
 def offline_scraper():
     try:
-        # TODO
+        # TODO 
         #kod do wystartowania offline scrapera
         return {"success":"Scraper Started"}
     except BaseException as err:

@@ -1,4 +1,4 @@
-from SPFinance.database_connection.collections.collection_generic  import CollectionGeneric
+from SPFinance.database_connection.collections.collection_generic import CollectionGeneric
 
 class Stock(CollectionGeneric):
     

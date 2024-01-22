@@ -14,14 +14,16 @@ services:
       - POSTGRES_DB=finance
 
   backend:
-    image: spbackend
+    container_name: spbackend
+    build: ./src/SPFinance/database_connection
     volumes:
-      - ./src/:/app/mounted
+      - ./src/SPFinance/database_connection/:/app
     ports:
       - 5000:5000
-    command: sh -c "cd /app/mounted && uvicorn SPFinance.database_connection.main:app --reload --host 0.0.0.0 --port 5000"
+    command: uvicorn SPFinance.database_connection.main:app --reload --host 0.0.0.0 --port 5000
 
   frontend:
+    container_name: spfrontend
     build: ./src/frontend
     volumes:
       - './src/frontend:/app'
