@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.collections.stock import Stock
 
 
-stock = Stock(db_name="finance", config_path="/app/SPFinance/database_connection/connection.json")
+stock = Stock(db_name="finance", config_path="/app/app/connection.json")
 
 app = FastAPI()
 

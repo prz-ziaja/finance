@@ -20,7 +20,7 @@ services:
       - ./src/SPFinance/database_connection/src:/app
     ports:
       - 5000:5000
-    command: uvicorn SPFinance.database_connection.main:app --reload --host 0.0.0.0 --port 5000
+    command: uvicorn app.main:app --reload --host 0.0.0.0 --port 5000
 
   frontend:
     container_name: spfrontend
@@ -30,8 +30,6 @@ services:
       - '/app/node_modules'
     ports:
       - 8080:8080
-    environment:
-      - CHOKIDAR_USEPOLLING=true
 
 
 networks:

@@ -2,7 +2,7 @@
   <div id="app">
     <div class='d-flex align-center justify-center'>
       <v-btn @click="getMessage(), dialog = true" size="x-large" color="deep-purple">
-        Start Offline Scrapper star
+        Start Offline Scrapper
       </v-btn>
     </div>
 
