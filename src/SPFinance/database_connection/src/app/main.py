@@ -1,11 +1,10 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from SPFinance.database_connection.collections.stock import Stock
+from app.collections.stock import Stock
 
 
-stock = Stock(db_name="finance", config_path="/app/SPFinance/database_connection/connection.json")
+stock = Stock(db_name="finance", config_path="/app/app/connection.json")
 
 app = FastAPI()
 
@@ -31,7 +30,7 @@ def items():
 @app.get("/offline-scraper")
 def offline_scraper():
     try:
-        # TODO
+        # TODO 
         #kod do wystartowania offline scrapera
         return {"success":"Scraper Started"}
     except BaseException as err:
