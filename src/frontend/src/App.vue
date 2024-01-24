@@ -1,8 +1,9 @@
 <template>
   <v-app>
     <nav>
-      <router-link to="/home">Home</router-link> |
-      <router-link to="/">Start</router-link>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/scraper">Start Scraper</router-link> |
+      <router-link to="/stock/items">Stock Items</router-link>
     </nav>
     <router-view />
   </v-app>

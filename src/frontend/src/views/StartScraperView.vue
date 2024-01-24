@@ -54,7 +54,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 
 export default {
-  name: 'StartView',
+  name: 'StartScraperView',
   data() {
     return {
       returnInfo: {},

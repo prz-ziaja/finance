@@ -22,7 +22,7 @@ def home():
     return {"success": "Great Success"}
 
 
-@app.get("/items")
+@app.get("/stock/items")
 def items():
     return stock.get_documents()
 

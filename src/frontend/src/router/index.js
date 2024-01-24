@@ -1,17 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import StartView from '../views/StartView.vue'
+import StartScraperView from '../views/StartScraperView.vue'
+import StockItems from '../views/StockItems.vue'
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: HomeView
   },
   {
-    path: '/',
-    name: 'start',
-    component: StartView
+    path: '/scraper',
+    name: 'scraper',
+    component: StartScraperView
+  },
+  {
+    path: '/stock/items',
+    name: 'StockItems',
+    component: StockItems
   },
 ]
 
