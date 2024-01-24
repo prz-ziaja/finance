@@ -7,7 +7,7 @@
                         <v-text-field v-model="search" label="Search" prepend-inner-icon="mdi-magnify" single-line
                             variant="outlined" hide-details></v-text-field>
                     </template>
-                    <v-data-table :headers="headers" :items="tableItems" :search="search">
+                    <v-data-table :headers="headers" :items="tableItems" :search="search" :loading="loading">
 
                     </v-data-table>
                 </v-card>
@@ -18,13 +18,13 @@
     
 <script>
 import axios from 'axios';
-import { ref } from 'vue';
 
 export default {
     name: 'StockItems',
     data() {
         return {
             search: '',
+            loading: false,
             headers: [
                 {
                     align: 'start',
@@ -40,16 +40,16 @@ export default {
             ],
             items: [],
             tableItems: [],
-            dialogWindow: ref(false),
         };
     },
     methods: {
         getItems() {
-            this.dialogWindow = true;
+            this.loading = true
             axios.get('/stock/items')
                 .then((res) => {
                     this.items = res.data;
                     this.itemsToTable()
+                    this.loading = false
                 })
                 .catch((error) => {
                     console.error(error);
