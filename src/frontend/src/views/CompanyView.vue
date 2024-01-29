@@ -10,25 +10,25 @@
                 Select company name to see stock history
             </v-card-subtitle>
 
-            <v-select
-                v-model="companyName"
-                label="Select"
-                :items="companyNames">
+            <v-select v-model="companyName" label="Select" :items="companyNames">
             </v-select>
-            
 
+            <LineChart v-if="loaded" />
 
         </v-card>
     </div>
 </template>
 
 <script>
+import LineChart from '@/components/LineChart.vue'
 import axios from 'axios';
 
-export default{
+export default {
     name: "CompanyView",
+    components: { LineChart },
     data() {
-        return{
+        return {
+            loaded: false,
             companyName: '',
             companyNames: [],
             companyData: [],
@@ -37,24 +37,26 @@ export default{
     methods: {
         getCompanyNames() {
             axios.get('/companies')
-            .then((res) => {
-                this.companyNames = res.data;
-            })
+                .then((res) => {
+                    this.companyNames = res.data;
+                })
         },
-        getCompanyItems(){
+        getCompanyItems() {
+            this.loaded = false;
             axios.get('/company/' + this.companyName)
-            .then((res) => {
-                this.companyData = res.data
-                console.log(this.companyData)
-            })
+                .then((res) => {
+                    this.companyData = res.data;
+                    this.loaded = true;
+                    console.log(this.companyData)
+                })
         },
     },
-    mounted(){
+    mounted() {
         this.getCompanyNames()
     },
-    watch:{
+    watch: {
         companyName: {
-            handler(){
+            handler() {
                 this.getCompanyItems()
             }
         }
