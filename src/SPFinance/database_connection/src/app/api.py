@@ -70,7 +70,7 @@ class Api:
         Get document from collection
         """
         try:
-            self.client.execute(
+            data = self.client.execute(
                 """
                 SELECT * FROM {collection} WHERE {filter}
                 """.format(
@@ -81,7 +81,29 @@ class Api:
         except BaseException as err:
             print("ERROR: ", err)
             self.client.rollback()
+        
+        return data
     
+    
+    def get_columns(self, column=None):
+        """
+        Get document from collection
+        """
+        try:
+            data = self.client.execute(
+                """
+                SELECT {column} FROM {collection}
+                """.format(
+                    collection = self.collection,
+                    column = column
+                )
+            ).fetchall()
+            
+        except BaseException as err:
+            print("ERROR: ", err)
+            self.client.rollback()
+        return data
+        
     
     def add_document(self, document):
         """

@@ -3,10 +3,10 @@
     <h1>{{ msg }}</h1>
   </div>
   <div>
-    <v-container class="ma-20">
+    <v-container>
       <v-row align="center" justify="center">
         <v-col cols="auto">
-          <v-card variant=outlined width="400" height="200" class="mx-auto pa-3">
+          <v-card variant=outlined width="350" height="200" class="mx-auto pa-3">
             <v-card-title>
               <h2>
                 Offline Scraper
@@ -27,7 +27,7 @@
           </v-card>
         </v-col>
         <v-col cols="auto">
-          <v-card variant=outlined width="400" height="200" class="mx-auto pa-3">
+          <v-card variant=outlined width="350" height="200" class="mx-auto pa-3">
             <v-card-title>
               <h2>
                 Stock Items
@@ -42,6 +42,27 @@
               <v-btn rounded="lg" elevated href="/stock/items">
                 <h3>
                   Route to Stock Items
+                </h3>
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+        <v-col cols="auto">
+          <v-card variant=outlined width="350" height="200" class="mx-auto pa-3">
+            <v-card-title>
+              <h2>
+                Company View
+              </h2>
+            </v-card-title>
+            <v-card-text class="py-5">
+              <h5>
+                Click to see predictions for one company.
+              </h5>
+            </v-card-text>
+            <v-card-actions class="pa-5 pb-10 justify-center align-center">
+              <v-btn rounded="lg" elevated href="/company">
+                <h3>
+                  Route to Company View
                 </h3>
               </v-btn>
             </v-card-actions>

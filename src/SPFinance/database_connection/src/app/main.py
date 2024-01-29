@@ -35,3 +35,12 @@ def offline_scraper():
         return {"success":"Scraper Started"}
     except BaseException as err:
         return {"error": str(err)}
+    
+    
+@app.get("/company/{company_name}")
+def get_company(company_name: str):
+    return stock.get_company(company_name)
+
+@app.get("/companies")
+def get_companies():
+    return stock.get_companies()

@@ -3,7 +3,8 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/scraper">Start Scraper</router-link> |
-      <router-link to="/stock/items">Stock Items</router-link>
+      <router-link to="/stock/items">Stock Items</router-link> | 
+      <router-link to="/company">Company</router-link>
     </nav>
     <router-view />
   </v-app>
